@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 import android.util.Pair;
 import android.widget.Toast;
 
-import com.example.samir.myapplication.backend.myApi.MyApi;
+
+import com.example.samir.myapplication.backend.udacityApi.UdacityApi;
+import com.example.samir.myapplication.backend.udacityApi.model.JokeModel;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -13,14 +15,14 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 
 import java.io.IOException;
 
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
-    private static MyApi myApiService = null;
+public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+    private static UdacityApi myApiService = null;
     private Context context;
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
         if(myApiService == null) {  // Only do this once
-            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
+            UdacityApi.Builder builder = new UdacityApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                 // options for running against local devappserver
                 // - 10.0.2.2 is localhost's IP address in Android emulator
@@ -41,7 +43,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
         String name = params[0].second;
 
         try {
-            return myApiService.sayHi(name).execute().getData();
+            final UdacityApi.Joke joke = myApiService.joke();
+            final JokeModel execute = joke.execute();
+            final String data = execute.getData();
+            return data;
         } catch (IOException e) {
             return e.getMessage();
         }

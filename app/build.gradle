@@ -5,7 +5,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 22
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -39,4 +39,5 @@ dependencies {
 
     compile project(path: ':backend', configuration: 'android-endpoints')
     compile project(path: ':jokerproviderlib')
+    compile project(path: ':jokerproviderandroid')
 }

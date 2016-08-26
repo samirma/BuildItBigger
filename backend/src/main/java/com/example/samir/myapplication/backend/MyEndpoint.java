@@ -18,7 +18,7 @@ import javax.inject.Named;
  * An endpoint class we are exposing
  */
 @Api(
-        name = "myApi",
+        name = "udacityApi",
         version = "v1",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.myapplication.samir.example.com",
@@ -31,8 +31,8 @@ public class MyEndpoint {
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
-    @ApiMethod(name = "sayHi")
-    public JokeModel sayHi(@Named("name") String name) {
+    @ApiMethod(name = "joke")
+    public JokeModel getJoke() {
 
         final JokeProvider jokeProvider = JokeProviderFactory.getJokeProvider();
 
