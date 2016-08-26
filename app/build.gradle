@@ -37,5 +37,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.3.0'
     apt 'com.jakewharton:butterknife-compiler:8.3.0'
 
+    compile project(path: ':backend', configuration: 'android-endpoints')
     compile project(path: ':jokerproviderlib')
 }

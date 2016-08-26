@@ -5,4 +5,5 @@ package com.udacity.provider;
  */
 
 public interface JokeProvider {
+    String getJoke();
 }
