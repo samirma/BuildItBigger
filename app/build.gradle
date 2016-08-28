@@ -44,3 +44,39 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
 }
+
+
+
+task runServer {
+    dependsOn ':backend:appengineRun'
+    project(":backend").afterEvaluate { backend ->
+        backend.extensions.appengine.daemon = true
+    }
+    doLast{
+        println "Server Started"
+    }
+
+}
+
+task stopServer {
+    dependsOn ':backend:appengineStop'
+    project(":backend").afterEvaluate { backend ->
+        backend.extensions.appengine.daemon = true
+    }
+    doLast{
+        println "Server Stoped"
+    }
+
+}
+
+
+afterEvaluate { project ->
+    println "Tasks configured"
+    project.tasks.matching({ it.name.startsWith("connected") }).all {
+        dependsOn runServer
+        finalizedBy stopServer
+    }
+
+}
+
+

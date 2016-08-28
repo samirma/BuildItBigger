@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
     }
 
     public void tellJoke(View view) {
-        final EndpointsAsyncTask asyncTask = new EndpointsAsyncTask();
+        final EndpointsAsyncTask asyncTask = new EndpointsAsyncTask(this);
+        asyncTask.execute();
     }
 
 
